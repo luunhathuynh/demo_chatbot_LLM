@@ -1,7 +1,11 @@
 <template>
-  <ChatLayout />
+  <router-view />
 </template>
 
 <script setup lang="ts">
-import ChatLayout from './components/ChatLayout.vue';
+// No script needed for this basic setup
 </script>
+
+<style>
+/* Global styles can be imported here or in main.css */
+</style>

@@ -1,111 +1,18 @@
-# System Patterns: Vue 3 Chatbot UI
+# System Patterns
 
-## Architecture Overview
-The application follows a component-based architecture using Vue 3's Composition API, organized for maximum reusability and maintainability.
+**Architecture:**
 
-## Component Structure
-```
-chatbot-ui/
-├── src/
-│   ├── components/
-│   │   ├── ChatLayout.vue    # Main chat container
-│   │   ├── ChatMessage.vue   # Individual message display
-│   │   └── InputBox.vue      # Message input component
-```
+*   **Component-based architecture**: The application is built using Vue 3 components.
+*   **Single-page application (SPA)**: The application is a single-page application, with navigation handled by Vue Router.
 
-## Design Patterns
+**Key Technical Decisions:**
 
-### 1. Composition Pattern
-- Utilizes Vue 3 Composition API
-- Components organized by feature
-- Shared logic extracted into composable functions
-- State management using reactive refs
+*   **Vue 3**: Used for building the user interface.
+*   **TypeScript**: Used for type safety and code maintainability.
+*   **Tailwind CSS**: Used for styling the components.
+*   **Axios**: Used for making API calls.
+*   **Vue Router**: Used for navigation.
 
-### 2. Component Communication
-```typescript
-// Parent to Child: Props
-// ChatLayout -> ChatMessage
-props: {
-  content: string
-  role: 'user' | 'ai'
-  timestamp: string
-}
+**Design Patterns:**
 
-// Child to Parent: Events
-// InputBox -> ChatLayout
-emit('send-message', newMessage)
-```
-
-### 3. State Management
-- Local component state using `ref`
-- Reactive message history
-- Computed properties for derived state
-- Watchers for side effects
-
-### 4. API Integration
-- Axios for HTTP requests
-- Error handling middleware
-- Response transformation
-- Timeout handling
-
-### 5. UI Patterns
-- Responsive design with Tailwind CSS
-- Auto-scrolling message container
-- Error state visualization
-- Loading state handling
-
-## Implementation Examples
-
-### Message Handling
-```typescript
-const messages = ref([]);
-const sendMessage = async (newMessage: string) => {
-  // Add user message
-  messages.value.push({
-    content: newMessage,
-    role: 'user',
-    timestamp: getCurrentTime()
-  });
-  
-  // Handle API response
-  try {
-    const response = await api.sendMessage(newMessage);
-    handleSuccess(response);
-  } catch (error) {
-    handleError(error);
-  }
-};
-```
-
-### Auto-scroll Pattern
-```typescript
-const scrollToBottom = async () => {
-  await nextTick();
-  const container = document.querySelector('.overflow-y-auto');
-  if (container) {
-    container.scrollTop = container.scrollHeight;
-  }
-};
-```
-
-## Error Handling Strategy
-1. API Errors
-   - Network connectivity issues
-   - Server response errors
-   - Timeout handling
-
-2. UI Error States
-   - Error message display
-   - Retry mechanisms
-   - Fallback content
-
-3. Runtime Errors
-   - Component error boundaries
-   - Graceful degradation
-   - Error logging
-
-## Performance Considerations
-- Efficient message rendering
-- Debounced input handling
-- Optimized scroll behavior
-- Lazy loading when applicable
+*   **Component Composition**: The application is built by composing smaller, reusable components.
